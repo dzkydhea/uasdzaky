@@ -1,0 +1,25 @@
+CREATE DATABASE IF NOT EXISTS db_mahasiswa_web;
+USE db_mahasiswa_web;
+
+CREATE TABLE tbl_mahasiswa (
+  idMhs INT AUTO_INCREMENT PRIMARY KEY,
+  nim VARCHAR(20) NOT NULL UNIQUE,
+  nama VARCHAR(100) NOT NULL,
+  jurusan VARCHAR(50),
+  alamat TEXT
+);
+
+CREATE TABLE tbl_user (
+  idUser INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  idMhs INT,
+  FOREIGN KEY (idMhs) REFERENCES tbl_mahasiswa(idMhs) ON DELETE CASCADE
+);
+
+CREATE TABLE tbl_foto (
+  idFoto INT AUTO_INCREMENT PRIMARY KEY,
+  idUser INT,
+  foto VARCHAR(255),
+  FOREIGN KEY (idUser) REFERENCES tbl_user(idUser) ON DELETE CASCADE
+);
